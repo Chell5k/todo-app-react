@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const todos = [
   { id: 1, text: 'Hello, world!' },
-  { id: 2, text: 'Pick up groceries', status: 'complete' }
+  { id: 2, text: 'Pick up groceries', status: 'complete' },
+  { id: 3, text: 'Pick up laundry', status: 'complete'}
 ];
 
 app.get('/', (req, res) => {
@@ -26,11 +27,10 @@ app.get('/todos', (req, res) => {
 });
 
 app.get('/todos/:id', (req, res) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id,10);
   const index = todos.findIndex((todo) => {
     return todo.id === id;
   });
-
   res.json(JSON.stringify(todos[index]));
 });
 
