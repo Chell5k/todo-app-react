@@ -12,52 +12,65 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const todos = [
   { id: 1, text: 'Hello, world!' },
-  { id: 2, text: 'Pick up groceries', status: 'complete' },
-  { id: 3, text: 'Pick up laundry', status: 'complete'}
+  { id: 2, text: 'Pick up groceries', status: 'complete' }
 ];
 
+// Index
 app.get('/', (req, res) => {
   const bundle = `//${req.hostname}:8080/public/bundle.js`;
 
   res.render('index', { bundle });
 });
 
+//Get All
 app.get('/todos', (req, res) => {
-  res.json(JSON.stringify(todos));
+  // res.json(JSON.stringify(todos));
+  res.json(todos);
 });
 
+
+//Get one
 app.get('/todos/:id', (req, res) => {
   const id = parseInt(req.params.id,10);
   const index = todos.findIndex((todo) => {
     return todo.id === id;
   });
-  res.json(JSON.stringify(todos[index]));
+  // res.json(JSON.stringify(todos[index]));
+  res.json(todos[index]);
 });
 
+//Create
 app.post('/todos', (req, res) => {
   const text = req.body.data.text;
-
   if (!text) {
     res.status(400).json({ message: 'text is required' });
 
     return;
   }
 
-  const id = todos.length + 1;
+  const len = todos.length;
+  const id = !len ? 1 : todos[len -1].id + 1;
   const newTodo = { id, text, status: 'active' };
 
   todos.push(newTodo);
-
   res.status(201).json(todos);
 });
 
+//Delete
 app.delete('/todos/:id', (req, res) => {
-  res.status(500).send({ message: 'not implemented' });
+  const id = parseInt(req.params.id,10);
+  const index = todos.findIndex((todo) => {
+    return todo.id === id;
+  });
+  todos.splice(index,1)
+  res.json(todos);
 });
 
-app.put('/todos/:id', (req, res) => {
-  res.status(500).send({ message: 'not implemented' });
-});
+  //update
+  app.put('/todos/:id', (req, res) => {
+    res.status(500).send({ message: 'not implemented' });
+  });
+
 
 // Node server.
 const port = 3000;
