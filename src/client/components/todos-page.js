@@ -49,6 +49,8 @@ class TodosPage extends React.Component {
     this.removeTodo = this.removeTodo.bind(this);
     this.setFilterBy = this.setFilterBy.bind(this);
     this.updateTodos = this.updateTodos.bind(this);
+    this.toggleTodo = this.toggleTodo.bind(this);
+    this.putTodo = this.putTodo.bind(this);
   }
 
   /**
@@ -120,6 +122,32 @@ class TodosPage extends React.Component {
     this.setState({ todos });
   }
 
+    /**
+   * Callback function to replace todo with results of fetching the todo PUT endpoint
+   *
+   * @param  {object} json - Resulting JSON from fetch
+   */
+  putTodo(json) {
+    const index = this.state.todos.findIndex(todo => {
+      return todo.id === json.id;
+    });
+
+    this.updateTodos(
+      [
+        ...this.state.todos.slice(0, index),
+        json,
+        ...this.state.todos.slice(index + 1),
+      ]
+    );
+  }
+
+//Toggle todos
+ toggleTodo(todo) {
+    const newTodo = Object.assign({}, todo);
+    newTodo.status = todo.status === 'complete' ? 'active' : 'complete';
+    newTodo.archive = false;
+    api('PUT', newTodo, this.putTodo(newTodo));
+  }
 
   /**
    * Render
@@ -141,6 +169,7 @@ class TodosPage extends React.Component {
           todos={this.state.todos}
           updateTodos={this.updateTodos}
           deleteTodo={this.removeTodo}
+          toggleTodo={this.toggleTodo}
         />
       </div>
     );
