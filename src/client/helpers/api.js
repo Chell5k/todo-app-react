@@ -30,7 +30,7 @@ export function getApiPromise(method, data) {
   if (['DELETE', 'PUT'].indexOf(method) !== -1) {
     url += `/${data.id}`;
   }
-
+  console.log('mich: getApiPromise: method, data, url',method, data, url);
   const options = {
     method,
     headers: {

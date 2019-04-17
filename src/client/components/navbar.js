@@ -38,28 +38,39 @@ const Navbar = ({ filterBy, onClickFilter }) => {
   let completedLinkCls = `${baseCls}__item`;
   completedLinkCls += filterBy === 'completed' ? ` ${baseCls}__item--active` : '';
 
+  console.log('mich Navbar activeLinkCls:',activeLinkCls);
+  console.log('mich Navbar completedLinkCls:',completedLinkCls);
+
   return (
     <div className={baseCls}>
-      <NavLink
-        to="/"
-        activeClassName={`${baseCls}__item--active`}
-        className={`${baseCls}__item`}
-        onClick={() => onClickFilter('')}
-      >
-        All
-      </NavLink>
-      <span
-        className={activeLinkCls}
-        onClick={() => onClickFilter('active')}
-      >
-        Active
-      </span>
-      <span
-        className={completedLinkCls}
-        onClick={() => onClickFilter('completed')}
-      >
-        Completed
-      </span>
+      <ul className="valign-wrapper">
+        <li>
+          <NavLink
+            to="/"
+            activeClassName={`${baseCls}__item--active`}
+            className={`${baseCls}__item`}
+            onClick={() => onClickFilter('')}
+          >
+            All
+          </NavLink>
+        </li>
+        <li>
+          <span
+            className={activeLinkCls}
+            onClick={() => onClickFilter('active')}
+          >
+            Active
+          </span>
+        </li>
+        <li>
+          <span
+            className={completedLinkCls}
+            onClick={() => onClickFilter('completed')}
+          >
+            Completed
+          </span>
+        </li>
+      </ul>
     </div>
   );
 }

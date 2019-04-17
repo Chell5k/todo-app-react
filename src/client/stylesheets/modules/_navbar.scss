@@ -1,5 +1,9 @@
 // Navbar module
 .navbar {
+  height: 6vh;
+  background-color: map-get($colors, lightgray);
+  color: map-get($colors, darkgray);
+
   &__item {
     text-decoration: none;
   }
@@ -7,4 +11,18 @@
   &__item--active {
     font-weight: 700;
   }
+}
+
+.navbar a {
+  color: map-get($colors, darkgray);
+}
+
+.navbar ul {
+  margin-left: var(--marginleft);
+  height: 100%;
+}
+
+.navbar li {
+  display: inline-block;
+  margin-right: 2%;
 }

@@ -119,7 +119,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
         default:
           filtered = false;
       }
-
+      console.log('todos: todos.map todo, filtered:',todo, filtered)
       return (
         <Todo
           key={todo.id}
@@ -134,7 +134,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
   }
 
   return (
-    <ul className={baseCls}>
+    <ul className={baseCls + ' collection'}>
       {renderTodos()}
     </ul>
   )

@@ -12,8 +12,8 @@ const Header = () => {
   const baseCls = 'header';
 
   return (
-    <div className={baseCls}>
-      <Link to="/">MyTodos</Link>
+    <div className={baseCls + " valign-wrapper flow-text"}>
+        <Link to="/">MyTodos</Link>
     </div>
   )
 };

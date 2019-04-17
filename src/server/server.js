@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 //Get All
 app.get('/todos', (req, res) => {
   // res.json(JSON.stringify(todos));
-  res.json(todos);
+  res.status(200).json(todos);
 });
 
 
@@ -36,7 +36,7 @@ app.get('/todos/:id', (req, res) => {
     return todo.id === id;
   });
   // res.json(JSON.stringify(todos[index]));
-  res.json(todos[index]);
+  res.status(200).json(todos[index]);
 });
 
 //Create
@@ -63,13 +63,19 @@ app.delete('/todos/:id', (req, res) => {
     return todo.id === id;
   });
   todos.splice(index,1)
-  res.json(todos);
+  res.status(200).json(todos);
 });
 
   //update
-  app.put('/todos/:id', (req, res) => {
-    res.status(500).send({ message: 'not implemented' });
+ app.put('/todos/:id', (req, res) => {
+  const id = parseInt(req.params.id,10);
+  const newText = req.body.text;
+  const index = todos.findIndex((todo) => {
+    return todo.id === id;
   });
+  todos[index].text = newText;
+  res.status(200).json(todos[index]);
+});
 
 
 // Node server.
