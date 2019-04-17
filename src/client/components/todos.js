@@ -30,7 +30,7 @@ const defaultProps = {
  * Todos component
  * @returns {ReactElement}
  */
-const Todos = ({ filterBy, todos, updateTodos }) => {
+const Todos = ({ filterBy, todos, updateTodos, deleteTodo }) => {
   /**
    * Base CSS class
    */
@@ -41,18 +41,18 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
    *
    * @param  {object} json - Resulting JSON from fetch
    */
-  const deleteTodo = json => {
-    const index = todos.findIndex(todo => {
-      return todo.id === json.id;
-    });
+  // const deleteTodo = json => {
+  //   const index = todos.findIndex(todo => {
+  //     return todo.id === json.id;
+  //   });
 
-    updateTodos(
-      [
-        ...todos.slice(0, index),
-        ...todos.slice(index + 1),
-      ]
-    );
-  }
+  //   updateTodos(
+  //     [
+  //       ...todos.slice(0, index),
+  //       ...todos.slice(index + 1),
+  //     ]
+  //   );
+  // }
 
   /**
    * Callback function to replace todo with results of fetching the todo PUT endpoint
@@ -80,7 +80,8 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
    * @param {object} todo - Todo object
    */
   const onClickDelete = todo => {
-    api('DELETE', todo, deleteTodo);
+    // api('DELETE', todo, deleteTodo);
+    deleteTodo(todo);
   };
 
   /**

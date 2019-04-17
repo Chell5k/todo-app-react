@@ -1,0 +1,14 @@
+.summary {
+  height: 8vh;
+  background-color: map-get($colors, ui-light);
+  color: map-get($colors, darkgray);
+}
+
+.summary ul {
+  margin-left: var(--marginleft);
+  height: 100%;
+}
+.summary li {
+  display: inline-block;
+  margin-right: .5%;
+}

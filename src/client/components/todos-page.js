@@ -8,6 +8,7 @@ import Navbar from './navbar';
 import TodoForm from './todo-form';
 import TodoLink from './todo-link';
 import Todos from './todos';
+import Summary from './summary';
 
 /**
  * TodosPage component
@@ -44,19 +45,21 @@ class TodosPage extends React.Component {
 
     this.addTodo = this.addTodo.bind(this);
     this.postTodo = this.postTodo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
     this.setFilterBy = this.setFilterBy.bind(this);
     this.updateTodos = this.updateTodos.bind(this);
   }
 
   /**
-   * Component did mount
+   * Component did mount. Get all the Todos. 'Read All'
    */
   componentDidMount() {
     api('GET', null, this.updateTodos);
   }
 
   /**
-   * Add todo
+   * Add todo - 'C'
    *
    * @param  {string} text - Todo text
    */
@@ -69,7 +72,7 @@ class TodosPage extends React.Component {
   }
 
   /**
-   * Posts new todo to the todos collection
+   * Posts new todo to the todos collection. 'U'
    *
    * @param  {object} json - Resulting JSON from fetch
    */
@@ -89,6 +92,26 @@ class TodosPage extends React.Component {
   }
 
   /**
+   * Delete.
+   *
+   */
+
+  removeTodo(todo) {
+    api('DELETE', todo, this.deleteTodo(todo));
+  }
+  deleteTodo (json){
+     const index = this.state.todos.findIndex(todo => {
+      return todo.id === json.id;
+    });
+    this.updateTodos(
+      [
+        ...this.state.todos.slice(0, index),
+        ...this.state.todos.slice(index + 1),
+      ]
+    );
+  }
+
+  /**
    * Update todos array state
    *
    * @param  {Array} todos - Array of todo objects
@@ -96,6 +119,7 @@ class TodosPage extends React.Component {
   updateTodos(todos) {
     this.setState({ todos });
   }
+
 
   /**
    * Render
@@ -105,7 +129,10 @@ class TodosPage extends React.Component {
     console.log('mich TodosPage this.state', this.state);
     return (
       <div className={this.baseCls}>
+
         <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />
+
+        <Summary />
 
         <TodoForm onSubmit={this.addTodo} />
 
@@ -113,6 +140,7 @@ class TodosPage extends React.Component {
           filterBy={this.state.filterBy}
           todos={this.state.todos}
           updateTodos={this.updateTodos}
+          deleteTodo={this.removeTodo}
         />
       </div>
     );

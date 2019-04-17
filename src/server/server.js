@@ -69,11 +69,16 @@ app.delete('/todos/:id', (req, res) => {
   //update
  app.put('/todos/:id', (req, res) => {
   const id = parseInt(req.params.id,10);
-  const newText = req.body.text;
+  // const newText = req.body.text;
+  const newStatus = req.body.status;
   const index = todos.findIndex((todo) => {
     return todo.id === id;
   });
-  todos[index].text = newText;
+  // console.log('mich api update - old data in todos[index]', todos[index]);
+  // console.log('mich api update - new data - text, status', newText, newStatus);
+  // todos[index].text = newText;
+  // Only updating status at the moment.
+  todos[index].status = newStatus;
   res.status(200).json(todos[index]);
 });
 
