@@ -160,7 +160,7 @@ class TodosPage extends React.Component {
 
         <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />
 
-        <Summary />
+        <Summary todos={this.state.todos}/>
 
         <TodoForm onSubmit={this.addTodo} />
 
