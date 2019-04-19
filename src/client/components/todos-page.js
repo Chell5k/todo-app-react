@@ -141,13 +141,29 @@ class TodosPage extends React.Component {
     );
   }
 
-//Toggle todos
+  /**
+   * Modify todo state - toggle the status property of state todos array -
+   * 'active' -> 'completed', 'completed'  -> 'active'
+   *
+   * @param  {Array} todos - Array of todo objects
+   */
  toggleTodo(todo) {
     const newTodo = Object.assign({}, todo);
     newTodo.status = todo.status === 'complete' ? 'active' : 'complete';
     newTodo.archive = false;
-    api('PUT', newTodo, this.putTodo(newTodo));
+    api('PUT', newTodo, this.putTodo);
   }
+
+  /**
+   * Modify todo array state - mark all remaining active objects complete.
+   *
+   * @param  {Object} todo - object element of state array
+   *
+   */
+
+   // completeTodo(todos) {
+   //  const
+   // }
 
   /**
    * Render

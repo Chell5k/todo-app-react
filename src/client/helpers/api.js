@@ -45,6 +45,8 @@ export function getApiPromise(method, data) {
     });
   }
 
+  console.log('mich api - options:', options);
+
   return fetch(url, options)
   .then(response => {
     if (response.status >= 400) {
