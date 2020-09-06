@@ -36,3 +36,6 @@ Lastly, we'd like to implement [react-router](https://github.com/ReactTraining/r
 The client is implemented in [React](https://facebook.github.io/react/), and [Sass](http://sass-lang.com/) for styling. There's a handful of established patterns, so even if you're not familiar with React, you should be able to follow along. You’re more than welcome to use the documentation and whatever other resources you can.
 
 However, other than styling the client, implementing the new features, and fixing up the server, there aren't any hard requirements. You're welcome to approach this problem however you'd like.
+
+### Updates in 2020
+TBD
